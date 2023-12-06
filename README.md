@@ -38,3 +38,18 @@ npm run start:dev
 ```bash
 rvdf6D%bd5d$%¨D$%d54
 ```
+## Funcionalidades:
+
+### estabelecimentos:
+- `(GET)/estabelecimentos` = Buscar todos os estabelecimentos
+- `(POST) /estabelecimentos` = Criar novo estabelecimento
+- `(GET) /estabelecimentos/{id}` = Buscar estabelecimento específico
+- `(PUT) /estabelecimentos/{id}` = Atualizar estabelecimento específico
+- `(DELETE) /estabelecimentos/{id}` = Remover estabelecimento específico
+
+### Veículos:
+- `(GET) /veiculos` = Buscar todos os veículos
+- `(POST) /veiculos/{estabelecimento_id}` = Criar novo veículo + atualizar estabelecimento correspondente
+- `(GET) /veiculos/{id}` = Buscar veículo específico
+- `(PUT) /veiculos/{id}` = Atualizar veículo específico
+- `(DELETE) /veiculos/{id}` = Remover veículo específico + atualizar estabelecimento correspondente
