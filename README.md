@@ -21,30 +21,6 @@ Este projeto é uma API REST para gerenciar um estacionamento de carros e motos.
 
 ## Configuração
 
-### Configuração do Banco de Dados:
-
-- Certifique-se de ter o MySQL instalado e em execução.
-- Faça login no MySQL, utilizando suas próprias credenciais "root" pelo Command Line Client:
-- Crie um banco de dados com o nome "estacionamento":
-```bash
-CREATE DATABASE IF NOT EXISTS estacionamento;
-```
-- Crie um usuário "estacionamento_user_dev" com uma senha "abcdefgh":
-```bash
-CREATE USER 'estacionamento_user_dev'@'localhost' IDENTIFIED BY 'abcdefgh';
-```
-- Garanta os privilégios para o usuário:
-```bash
-GRANT ALL PRIVILEGES ON estacionamento.* TO 'estacionamento_user_dev'@'localhost';
-```
-- Dê flush para atualizar os privilégios:
-```bash
-FLUSH PRIVILEGES;
-``` 
-
-
-
-
 ### Instalação de Dependências
 
 ```bash

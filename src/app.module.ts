@@ -18,14 +18,14 @@ import { AuthMiddleware } from './auth/auth.middleware';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: '193.203.182.143',
       port: 3306,
       username: 'estacionamento_user_dev',
       password: 'abcdefgh',
       database: 'estacionamento',
       entities: [EstabelecimentoEntity, VeiculoEntity],
       synchronize: true,
-    }),
+    }), 
     TypeOrmModule.forFeature([EstabelecimentoEntity, VeiculoEntity]),
     JwtModule.register({
       secret: 'abcdefg123456789@@@',  
