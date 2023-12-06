@@ -35,18 +35,15 @@ export class VeiculoService {
     if (!placaRegex.test(veiculoData.placa)) {
       throw new BadRequestException('A placa deve ter o formato DDD-NNNN ou DDD-NDNN.');
     }
-
-    const veiculo = this.veiculoRepository.create(veiculoData);
-
-    const savedVeiculo = await this.veiculoRepository.save(veiculo);
-
     if (veiculoData.tipo === 'moto') {
-      await this.atualizarVagasEstabelecimento(estabelecimentoId, 'vagasMoto', 'add');
+      await this.atualizarVagasEstabelecimento(estabelecimentoId, 'vagasMoto', 'remove');
     } else if (veiculoData.tipo === 'carro') {
-      await this.atualizarVagasEstabelecimento(estabelecimentoId, 'vagasCarro', 'add');
+      await this.atualizarVagasEstabelecimento(estabelecimentoId, 'vagasCarro', 'remove');
     }
 
-    return savedVeiculo;
+    const veiculo = this.veiculoRepository.create(veiculoData);
+    
+    return await this.veiculoRepository.save(veiculo);
   }
             private async atualizarVagasEstabelecimento(estabelecimentoId: number, tipoVaga: 'vagasMoto' | 'vagasCarro' | null, option: 'add' | 'remove'): Promise<void> {
               if(!tipoVaga){ throw new NotFoundException(`Tipo de veículo errado / ausente`) }
@@ -70,6 +67,15 @@ export class VeiculoService {
     veiculoData.id = id
     veiculoData.estabelecimento_id = thisVeiculo.estabelecimento_id
 
+    if (veiculoData.tipo !== 'moto' && veiculoData.tipo !== 'carro') {
+      throw new NotFoundException(`Tipo de veículo errado / ausente`)
+    }
+    const placaRegex = /[A-Za-z]{3}[0-9][0-9A-Za-z][0-9]{2}/i;
+    if (!placaRegex.test(veiculoData.placa)) {
+      throw new BadRequestException('A placa deve ter o formato DDD-NNNN ou DDD-NDNN.');
+    }
+
+
     await this.veiculoRepository.update(id, veiculoData);
     return await this.findOne(id);
   }
@@ -86,7 +92,7 @@ async remove(id: number): Promise<void> {
   const estabelecimentoId = veiculoToRemove.estabelecimento_id;
   const tipo = veiculoToRemove.tipo === 'moto' ? 'vagasMoto': veiculoToRemove.tipo === 'carro' ? 'vagasCarro': null
 
-  await this.atualizarVagasEstabelecimento(estabelecimentoId, tipo, 'remove');
+  await this.atualizarVagasEstabelecimento(estabelecimentoId, tipo, 'add');
   await this.veiculoRepository.remove(veiculoToRemove);
 }
 

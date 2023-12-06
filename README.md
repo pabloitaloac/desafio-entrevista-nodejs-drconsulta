@@ -34,6 +34,7 @@ npm run start:dev
 ```
 
 ## Acesse a documentação Swagger em http://localhost:3000/api.
+## Visualização também online em https://teste-drconsulta.pabloitalo.com/api.
 ## Utilizar o token abaixo para autenticar as rotas necessárias
 ```bash
 rvdf6D%bd5d$%¨D$%d54
